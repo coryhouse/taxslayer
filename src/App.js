@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { get1099s } from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const default1099s = [
-  { ein: 1, employer: "Facebook", wages: 300000, withheld: 50000 },
-  { ein: 2, employer: "Apple", wages: 240000, withheld: 33000 },
-  { ein: 3, employer: "Amazon", wages: 60000, withheld: 15000 }
-];
-
 function App() {
-  const [f1099s, setF1099s] = useState(default1099s);
+  const [f1099s, setF1099s] = useState([]);
+  useEffect(load1099s, []); // call this function immediately after the first render
 
   function onDeleteClick(ein) {
-    const new1099s = f1099s.filter(f => f.ein !== ein);
-    setF1099s(new1099s);
+    setF1099s(f1099s.filter(f => f.ein !== ein));
+  }
+
+  function load1099s() {
+    get1099s().then(({ data }) => setF1099s(data));
   }
 
   // HTML is a representation of application state, not a source of truth.
