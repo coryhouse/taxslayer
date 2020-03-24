@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom"; // named import
+import App from "./App";
 
 // HTML vs JSX
 // 1. class vs className
@@ -7,4 +8,4 @@ import { render } from "react-dom"; // named import
 // 3. string styles vs object styles - NOTE: IS OPTIONAL
 // 4. must specify unit of measurement vs px is default
 // 5. kebab-cased vs camelCased
-render(<h1>Hai World!</h1>, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
