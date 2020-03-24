@@ -8,19 +8,18 @@ function App() {
   ];
 
   function render1099(f1099) {
+    // object destructuring
+    const { ein, employer, wages, withheld } = f1099;
     return (
       <tr>
-        <td>{f1099.ein}</td>
-        <td>{f1099.employer}</td>
-        <td>{f1099.wages}</td>
-        <td>{f1099.withheld}</td>
+        <td>{ein}</td>
+        <td>{employer}</td>
+        <td>{wages}</td>
+        <td>{withheld}</td>
       </tr>
     );
   }
 
-  // Exercise 1:
-  // Display ein, employer, wages, and withheld in a table.
-  // Display a header for each.
   return (
     <>
       <h1>1099s</h1>
@@ -33,6 +32,7 @@ function App() {
             <th>Withheld</th>
           </tr>
         </thead>
+        {/* using a point-free style. The 1099 is automatically passed as an argument. */}
         <tbody>{f1099s.map(render1099)}</tbody>
       </table>
     </>
