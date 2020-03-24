@@ -19,7 +19,7 @@ function App() {
     // object destructuring
     const { ein, employer, wages, withheld } = f1099;
     return (
-      <tr>
+      <tr key={ein}>
         <td>
           <button onClick={() => onDeleteClick(ein)} className="btn btn-danger">
             Delete
