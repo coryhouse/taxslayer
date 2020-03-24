@@ -1,5 +1,6 @@
 import React from "react";
 import { get1099s } from "./api/f1099api";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const f1099s = [
@@ -24,7 +25,7 @@ function App() {
   return (
     <>
       <h1>1099s</h1>
-      <table>
+      <table className="table">
         <thead>
           <tr>
             <th>EID</th>
