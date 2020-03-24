@@ -14,6 +14,9 @@ function App() {
     const { ein, employer, wages, withheld } = f1099;
     return (
       <tr>
+        <td>
+          <button className="btn btn-danger">Delete</button>
+        </td>
         <td>{ein}</td>
         <td>{employer}</td>
         <td>{wages}</td>
@@ -28,6 +31,7 @@ function App() {
       <table className="table">
         <thead>
           <tr>
+            <th></th>
             <th>EID</th>
             <th>Employer</th>
             <th>Wages</th>
