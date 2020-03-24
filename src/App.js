@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { get1099s } from "./api/f1099api";
+import { get1099s, delete1099 } from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [f1099s, setF1099s] = useState([]);
   useEffect(load1099s, []); // call this function immediately after the first render
 
-  function onDeleteClick(ein) {
-    setF1099s(f1099s.filter(f => f.ein !== ein));
+  function onDeleteClick(id) {
+    delete1099(id).then(() => {
+      // Update local React state after a successful delete
+      setF1099s(f1099s.filter(f => f.id !== id));
+    });
   }
 
   function load1099s() {
@@ -17,11 +20,11 @@ function App() {
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
-    const { ein, employer, wages, withheld } = f1099;
+    const { id, ein, employer, wages, withheld } = f1099;
     return (
-      <tr key={ein}>
+      <tr key={id}>
         <td>
-          <button onClick={() => onDeleteClick(ein)} className="btn btn-danger">
+          <button onClick={() => onDeleteClick(id)} className="btn btn-danger">
             Delete
           </button>
         </td>
