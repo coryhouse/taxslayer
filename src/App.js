@@ -18,6 +18,10 @@ function App() {
     get1099s().then(({ data }) => setF1099s(data));
   }
 
+  function handleSubmit(event) {
+    event.preventDefault(); // don't reload the page
+  }
+
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
@@ -45,7 +49,7 @@ function App() {
     <>
       <h1>1099s</h1>
       <h2>Add 1099</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input label="EIN" id="ein" />
         <Input label="Employer" id="employer" />
         <Input label="Wages" id="wages" />
