@@ -2,7 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Desturcturing props
-const Input = ({ id, label, value, onChange, required, onBlur, error }) => {
+const Input = ({
+  id,
+  label,
+  value,
+  onChange,
+  required,
+  onBlur,
+  error,
+  onError
+}) => {
+  function handleBlur(event) {
+    let validationError = "";
+    if (required && !value) validationError = `${label} is required`;
+    if (onError) onError(validationError, id);
+    if (onBlur) onBlur(event); // call onBlur if specified
+  }
+
   return (
     <div className="form-group">
       <label htmlFor={id}>
@@ -11,7 +27,7 @@ const Input = ({ id, label, value, onChange, required, onBlur, error }) => {
       <br />
       <input
         id={id}
-        onBlur={onBlur}
+        onBlur={handleBlur}
         className="form-control"
         onChange={onChange}
         value={value}
@@ -32,6 +48,9 @@ Input.propTypes = {
 
   /** Specify an error to display below the input */
   error: PropTypes.string,
+
+  /** Called when validation fails */
+  onError: PropTypes.func,
 
   /** Input label */
   label: PropTypes.string.isRequired,

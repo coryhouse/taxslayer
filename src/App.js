@@ -63,6 +63,17 @@ function App() {
     }
   }
 
+  function handleError(error, id) {
+    const newErrors = { ...errors };
+    if (error) {
+      newErrors[id] = error;
+    } else {
+      // clear any existing error for the field
+      delete newErrors[id];
+    }
+    setErrors(newErrors);
+  }
+
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
@@ -92,8 +103,9 @@ function App() {
       <h2>Add 1099</h2>
       <form onSubmit={handleSubmit}>
         <Input
+          label="EIN"
           id="ein"
-          onBlur={validate}
+          onError={handleError}
           error={errors.ein}
           required
           onChange={handleChange}
@@ -102,7 +114,7 @@ function App() {
         <Input
           label="Employer"
           id="employer"
-          onBlur={validate}
+          onError={handleError}
           error={errors.employer}
           required
           onChange={handleChange}
@@ -111,7 +123,7 @@ function App() {
         <Input
           label="Wages"
           id="wages"
-          onBlur={validate}
+          onError={handleError}
           error={errors.wages}
           required
           onChange={handleChange}
@@ -120,7 +132,7 @@ function App() {
         <Input
           label="Withheld"
           id="withheld"
-          onBlur={validate}
+          onError={handleError}
           error={errors.withheld}
           required
           onChange={handleChange}
