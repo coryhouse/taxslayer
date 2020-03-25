@@ -14,6 +14,6 @@ context("F1099s", () => {
       // all queries we make inside of here will only look in the form.
       cy.findByText("Add 1099").click();
     });
-    //cy.findByLabelText("Delete Amazon 1099").click(); // click delete on the first record.
+    cy.findByLabelText("Delete test Employer 1099").click(); // click delete on the first record.
   });
 });
