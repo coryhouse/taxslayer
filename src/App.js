@@ -44,8 +44,8 @@ function App() {
   return (
     <>
       <h1>1099s</h1>
+      <h2>Add 1099</h2>
       <form>
-        <h2>Add 1099</h2>
         <Input label="EIN" id="ein" />
         <Input label="Employer" id="employer" />
         <Input label="Wages" id="wages" />
