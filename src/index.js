@@ -11,8 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 // 4. must specify unit of measurement vs px is default
 // 5. kebab-cased vs camelCased
 render(
-  <ToastContainer>
+  <>
+    <ToastContainer />
     <App />
-  </ToastContainer>,
+  </>,
   document.getElementById("root")
 );

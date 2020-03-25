@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
+import { toast } from "react-toastify";
 
 // 2 Form validation
 // 4 React router move our add form to a new page
@@ -25,6 +26,7 @@ function App() {
     f1099api.delete1099(id).then(() => {
       // Update local React state after a successful delete
       setF1099s(f1099s.filter(f => f.id !== id));
+      toast.success("1099 Deleted");
     });
   }
 
