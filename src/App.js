@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { get1099s, delete1099 } from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Input from "./reusable/Input";
 
 function App() {
   const [f1099s, setF1099s] = useState([]);
@@ -43,6 +44,14 @@ function App() {
   return (
     <>
       <h1>1099s</h1>
+      <form>
+        <h2>Add 1099</h2>
+        <Input label="EIN" id="ein" />
+        <Input label="Employer" id="employer" />
+        <Input label="Wages" id="wages" />
+        <Input label="Withheld" id="withheld" />
+        <input type="submit" value="Add 1099" className="btn btn-primary" />
+      </form>
       <table className="table">
         <thead>
           <tr>
