@@ -31,9 +31,11 @@ function App() {
     f1099api.add1099();
   }
 
-  function handleEinChange(event) {
+  function handleChange(event) {
     const new1099 = { ...f1099 };
-    new1099.ein = event.target.value;
+    // Using computed property syntax to reference a property
+    // via a variable.
+    new1099[event.target.id] = event.target.value;
     setF1099(new1099);
   }
 
@@ -65,15 +67,25 @@ function App() {
       <h1>1099s</h1>
       <h2>Add 1099</h2>
       <form onSubmit={handleSubmit}>
+        <Input label="EIN" id="ein" onChange={handleChange} value={f1099.ein} />
         <Input
-          label="EIN"
-          id="ein"
-          onChange={handleEinChange}
-          value={f1099.ein}
+          label="Employer"
+          id="employer"
+          onChange={handleChange}
+          value={f1099.employer}
         />
-        <Input label="Employer" id="employer" value={f1099.employer} />
-        <Input label="Wages" id="wages" value={f1099.wages} />
-        <Input label="Withheld" id="withheld" value={f1099.withheld} />
+        <Input
+          label="Wages"
+          id="wages"
+          onChange={handleChange}
+          value={f1099.wages}
+        />
+        <Input
+          label="Withheld"
+          id="withheld"
+          onChange={handleChange}
+          value={f1099.withheld}
+        />
         <input type="submit" value="Add 1099" className="btn btn-primary" />
       </form>
       <table className="table">
