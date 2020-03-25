@@ -5,6 +5,18 @@ context("F1099s", () => {
     cy.visit("http://localhost:3000");
   });
 
+  it.only("should display validation onBlur of empty fields", () => {
+    cy.findByLabelText("EIN").blur();
+    cy.findByLabelText("Employer").blur();
+    cy.findByLabelText("Wages").blur();
+    cy.findByLabelText("Withheld").blur();
+
+    cy.findByText("EIN is required");
+    cy.findByText("Employer is required");
+    cy.findByText("Wages is required");
+    cy.findByText("Withheld is required");
+  });
+
   it("should add and delete a new record", () => {
     cy.findByLabelText("EIN").type("test EIN");
     cy.findByLabelText("Employer").type("test Employer");
