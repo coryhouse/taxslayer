@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { get1099s, delete1099 } from "./api/f1099api";
+import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
 
 function App() {
-  const [f1099s, setF1099s] = useState([]);
+  const [f1099s, setF1099s] = useState([]); // holds list of 1099s
+  const [f1099, setF1099] = useState({
+    // holds add 1099 form
+    id: null,
+    ein: "",
+    employer: "",
+    wages: "",
+    withheld: ""
+  });
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function onDeleteClick(id) {
-    delete1099(id).then(() => {
+    f1099api.delete1099(id).then(() => {
       // Update local React state after a successful delete
       setF1099s(f1099s.filter(f => f.id !== id));
     });
   }
 
   function load1099s() {
-    get1099s().then(({ data }) => setF1099s(data));
+    f1099api.get1099s().then(({ data }) => setF1099s(data));
   }
 
   function handleSubmit(event) {
     event.preventDefault(); // don't reload the page
+    f1099api.add1099();
   }
 
   // HTML is a representation of application state, not a source of truth.
