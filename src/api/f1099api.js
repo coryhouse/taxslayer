@@ -13,3 +13,7 @@ export function get1099s() {
 export function delete1099(id) {
   return axios.delete(`http://localhost:3001/f1099s/${id}`);
 }
+
+export function add1099(f1099) {
+  return axios.post("http://localhost:3001/f1099s", f1099);
+}
