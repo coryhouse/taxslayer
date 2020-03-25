@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-toastify": "^5.5.0",
     "start-server-and-test": "^1.10.11"
   },
   "scripts": {
