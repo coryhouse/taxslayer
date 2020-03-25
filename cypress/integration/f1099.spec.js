@@ -6,10 +6,18 @@ context("F1099s", () => {
   });
 
   it.only("should display validation onBlur of empty fields", () => {
-    cy.findByLabelText("EIN").blur();
-    cy.findByLabelText("Employer").blur();
-    cy.findByLabelText("Wages").blur();
-    cy.findByLabelText("Withheld").blur();
+    cy.findByLabelText("EIN *")
+      .focus()
+      .blur();
+    cy.findByLabelText("Employer *")
+      .focus()
+      .blur();
+    cy.findByLabelText("Wages *")
+      .focus()
+      .blur();
+    cy.findByLabelText("Withheld *")
+      .focus()
+      .blur();
 
     cy.findByText("EIN is required");
     cy.findByText("Employer is required");
