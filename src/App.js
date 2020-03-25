@@ -3,16 +3,17 @@ import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
 
+const new1099 = {
+  id: null,
+  ein: "",
+  employer: "",
+  wages: "",
+  withheld: ""
+};
+
 function App() {
   const [f1099s, setF1099s] = useState([]); // holds list of 1099s
-  const [f1099, setF1099] = useState({
-    // holds add 1099 form
-    id: null,
-    ein: "",
-    employer: "",
-    wages: "",
-    withheld: ""
-  });
+  const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function onDeleteClick(id) {
@@ -28,7 +29,10 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault(); // don't reload the page
-    f1099api.add1099();
+    f1099api.add1099(f1099).then(() => {
+      // this runs after successful add
+      setF1099(new1099); // reset form
+    });
   }
 
   function handleChange(event) {
