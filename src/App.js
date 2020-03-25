@@ -31,6 +31,12 @@ function App() {
     f1099api.add1099();
   }
 
+  function handleEinChange(event) {
+    const new1099 = { ...f1099 };
+    new1099.ein = event.target.value;
+    setF1099(new1099);
+  }
+
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
@@ -59,10 +65,15 @@ function App() {
       <h1>1099s</h1>
       <h2>Add 1099</h2>
       <form onSubmit={handleSubmit}>
-        <Input label="EIN" id="ein" />
-        <Input label="Employer" id="employer" />
-        <Input label="Wages" id="wages" />
-        <Input label="Withheld" id="withheld" />
+        <Input
+          label="EIN"
+          id="ein"
+          onChange={handleEinChange}
+          value={f1099.ein}
+        />
+        <Input label="Employer" id="employer" value={f1099.employer} />
+        <Input label="Wages" id="wages" value={f1099.wages} />
+        <Input label="Withheld" id="withheld" value={f1099.withheld} />
         <input type="submit" value="Add 1099" className="btn btn-primary" />
       </form>
       <table className="table">
