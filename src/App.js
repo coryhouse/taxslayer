@@ -91,11 +91,19 @@ function App() {
       <h1>1099s</h1>
       <h2>Add 1099</h2>
       <form onSubmit={handleSubmit}>
-        <Input id="ein" required onChange={handleChange} value={f1099.ein} />
+        <Input
+          id="ein"
+          onBlur={validate}
+          error={errors.ein}
+          required
+          onChange={handleChange}
+          value={f1099.ein}
+        />
         <Input
           label="Employer"
           id="employer"
           onBlur={validate}
+          error={errors.employer}
           required
           onChange={handleChange}
           value={f1099.employer}
@@ -103,6 +111,8 @@ function App() {
         <Input
           label="Wages"
           id="wages"
+          onBlur={validate}
+          error={errors.wages}
           required
           onChange={handleChange}
           value={f1099.wages}
@@ -110,6 +120,8 @@ function App() {
         <Input
           label="Withheld"
           id="withheld"
+          onBlur={validate}
+          error={errors.withheld}
           required
           onChange={handleChange}
           value={f1099.withheld}
