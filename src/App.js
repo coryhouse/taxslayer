@@ -3,6 +3,10 @@ import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
 
+// 2 Form validation
+// 4 React router move our add form to a new page
+// 1 Toast message
+// 3 async await
 const new1099 = {
   id: null,
   ein: "",
@@ -14,6 +18,7 @@ const new1099 = {
 function App() {
   const [f1099s, setF1099s] = useState([]); // holds list of 1099s
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
+  const [errors, setErrors] = useState({});
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function onDeleteClick(id) {
@@ -45,6 +50,19 @@ function App() {
     setF1099(new1099);
   }
 
+  function validate(event) {
+    if (!event.target.value) {
+      const newErrors = { ...errors };
+      newErrors[event.target.id] = "This field is required.";
+      setErrors(newErrors);
+    } else {
+      // clear any existing error for the field
+      const newErrors = { ...errors };
+      delete newErrors[event.target.id];
+      setErrors(newErrors);
+    }
+  }
+
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
@@ -73,22 +91,26 @@ function App() {
       <h1>1099s</h1>
       <h2>Add 1099</h2>
       <form onSubmit={handleSubmit}>
-        <Input label="EIN" id="ein" onChange={handleChange} value={f1099.ein} />
+        <Input id="ein" required onChange={handleChange} value={f1099.ein} />
         <Input
           label="Employer"
           id="employer"
+          onBlur={validate}
+          required
           onChange={handleChange}
           value={f1099.employer}
         />
         <Input
           label="Wages"
           id="wages"
+          required
           onChange={handleChange}
           value={f1099.wages}
         />
         <Input
           label="Withheld"
           id="withheld"
+          required
           onChange={handleChange}
           value={f1099.withheld}
         />
