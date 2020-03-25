@@ -5,7 +5,7 @@ context("F1099s", () => {
     cy.visit("http://localhost:3000");
   });
 
-  it("should delete a 1099 when delete is clicked", () => {
-    cy.get("#1").click(); // click delete on the first record.
+  it("should delete Amazon 1099 when delete is clicked", () => {
+    cy.findByLabelText("Delete Amazon 1099").click(); // click delete on the first record.
   });
 });

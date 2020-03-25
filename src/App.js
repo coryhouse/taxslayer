@@ -24,7 +24,11 @@ function App() {
     return (
       <tr key={id}>
         <td>
-          <button onClick={() => onDeleteClick(id)} className="btn btn-danger">
+          <button
+            aria-label={`Delete ${employer} 1099`}
+            onClick={() => onDeleteClick(id)}
+            className="btn btn-danger"
+          >
             Delete
           </button>
         </td>
