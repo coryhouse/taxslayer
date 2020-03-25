@@ -16,7 +16,11 @@ const Input = ({ id, label, value, onChange, required, onBlur, error }) => {
         onChange={onChange}
         value={value}
       />
-      {error && <div>{error}</div>}
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
     </div>
   );
 };
