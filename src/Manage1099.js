@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
+import { useHistory } from "react-router-dom";
 
 const new1099 = {
   id: null,
@@ -12,6 +13,7 @@ const new1099 = {
 };
 
 function Manage1099() {
+  const history = useHistory();
   const [f1099s, setF1099s] = useState([]); // holds list of 1099s
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   const [errors, setErrors] = useState({});
@@ -26,8 +28,8 @@ function Manage1099() {
     f1099api.add1099(f1099).then(response => {
       const saved1099 = response.data; // this has the new ID assigned
       // this runs after successful add
-      setF1099(new1099); // reset form
       setF1099s([...f1099s, saved1099]); // add new 1099 to the list
+      history.push("/f1099s");
     });
   }
 
