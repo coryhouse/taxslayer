@@ -20,27 +20,28 @@ function Manage1099({ f1099s, setF1099s }) {
   const idToEdit = parseInt(match.params.id);
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   const [errors, setErrors] = useState({});
-  useEffect(load1099s, []); // call this function immediately after the first render
-
-  function load1099s() {
-    if (!idToEdit) return;
-    if (f1099s.length === 0) {
-      f1099api.get1099s().then(({ data }) => {
+  useEffect(() => {
+    async function init() {
+      if (!idToEdit) return;
+      if (f1099s.length === 0) {
+        const { data } = await f1099api.get1099s();
         setF1099s(data); // This is an async call. React will set this state in the near future. That's why I'm referencing data below instead.
         const f1099ToEdit = get1099ById(data, idToEdit);
         setF1099(f1099ToEdit);
-      });
-    } else {
-      const f1099ToEdit = get1099ById(f1099s, idToEdit);
-      setF1099(f1099ToEdit);
+      } else {
+        const f1099ToEdit = get1099ById(f1099s, idToEdit);
+        setF1099(f1099ToEdit);
+      }
     }
-  }
 
-  function get1099ById(f1099s, id) {
-    const f1099ToEdit = f1099s.find(d => d.id === id);
-    if (!f1099ToEdit) return history.push("/page-not-found");
-    return f1099ToEdit;
-  }
+    init();
+
+    function get1099ById(f1099s, id) {
+      const f1099ToEdit = f1099s.find(d => d.id === id);
+      if (!f1099ToEdit) return history.push("/page-not-found");
+      return f1099ToEdit;
+    }
+  }, [f1099s, history, idToEdit, setF1099s]);
 
   function isValid() {
     const _errors = {}; // Deliberately prefixing with an underscore to avoid a naming conflict.

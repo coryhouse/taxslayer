@@ -9,12 +9,11 @@ import { f1099Type } from "./propTypes";
 function Grid({ f1099s, setF1099s }) {
   useEffect(load1099s, []); // call this function immediately after the first render
 
-  function onDeleteClick(id) {
-    f1099api.delete1099(id).then(() => {
-      // Update local React state after a successful delete
-      setF1099s(f1099s.filter(f => f.id !== id));
-      toast.success("1099 Deleted");
-    });
+  async function onDeleteClick(id) {
+    await f1099api.delete1099(id);
+    // Update local React state after a successful delete
+    setF1099s(f1099s.filter(f => f.id !== id));
+    toast.success("1099 Deleted");
   }
 
   function load1099s() {
