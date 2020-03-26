@@ -26,6 +26,10 @@ function Grid({ f1099s, setF1099s }) {
   // HTML is a representation of application state, not a source of truth.
   function render1099(f1099) {
     // object destructuring
+
+    // Exercise 4.9b
+    // Write a Cypress test: "should load 1099 when user clicks edit"
+    //  - The test will click on an edit button, and then confirm that you're on the Manage Page
     const { id, ein, employer, wages, withheld } = f1099;
     return (
       <tr key={id}>
@@ -33,10 +37,17 @@ function Grid({ f1099s, setF1099s }) {
           <button
             aria-label={`Delete ${employer} 1099`}
             onClick={() => onDeleteClick(id)}
-            className="btn btn-danger"
+            className="btn btn-outline-danger"
           >
             Delete
-          </button>
+          </button>{" "}
+          <Link
+            to={"/manage/" + id}
+            aria-label={`Edit ${employer} 1099`}
+            className="btn btn-outline-primary"
+          >
+            Edit
+          </Link>
         </td>
         <td>{ein}</td>
         <td>{employer}</td>

@@ -1,6 +1,12 @@
 /// <reference types="cypress" />
 
 context("F1099s", () => {
+  it.only("should load 1099 when user clicks edit", () => {
+    cy.visit("http://localhost:3000/f1099s");
+    cy.findByLabelText("Edit Amazon 1099").click();
+    cy.findByText("Edit Amazon 1099");
+  });
+
   it("should display validation onBlur of empty fields", () => {
     cy.visit("http://localhost:3000/manage");
     cy.findByLabelText("EIN *")
