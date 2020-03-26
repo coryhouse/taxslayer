@@ -16,7 +16,8 @@ function App() {
       <Route path="/f1099s">
         <Grid f1099s={f1099s} setF1099s={setF1099s} />
       </Route>
-      <Route path="/manage">
+      {/* Last segment of URL is optional. It holds the 1099 ID if populated. */}
+      <Route path="/manage/:id?">
         <Manage1099 f1099s={f1099s} setF1099s={setF1099s} />
       </Route>
     </div>

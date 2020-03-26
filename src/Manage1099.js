@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { f1099Type } from "./propTypes";
 
 const new1099 = {
@@ -16,13 +16,19 @@ const new1099 = {
 
 function Manage1099({ f1099s, setF1099s }) {
   const history = useHistory();
+  const match = useRouteMatch();
+  const idToEdit = match.params.id;
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   const [errors, setErrors] = useState({});
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function load1099s() {
-    if (f1099s.length === 0)
-      f1099api.get1099s().then(({ data }) => setF1099s(data));
+    if (f1099s.length === 0 && idToEdit)
+      f1099api.get1099s().then(({ data }) => {
+        setF1099s(data);
+        const f1099ToEdit = data.find(d => d.id === parseInt(idToEdit));
+        setF1099(f1099ToEdit);
+      });
   }
 
   function handleSubmit(event) {
