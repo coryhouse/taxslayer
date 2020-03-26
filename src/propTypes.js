@@ -5,6 +5,6 @@ export const f1099Type = PropTypes.shape({
   id: PropTypes.number.isRequired,
   ein: PropTypes.string.isRequired,
   employer: PropTypes.string.isRequired,
-  wages: PropTypes.string.isRequired,
-  withheld: PropTypes.string.isRequired
+  wages: PropTypes.number.isRequired,
+  withheld: PropTypes.number.isRequired
 });
