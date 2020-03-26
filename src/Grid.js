@@ -4,6 +4,7 @@ import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { f1099Type } from "./propTypes";
 
 function Grid({ f1099s, setF1099s }) {
   useEffect(load1099s, []); // call this function immediately after the first render
@@ -68,7 +69,7 @@ function Grid({ f1099s, setF1099s }) {
 
 Grid.propTypes = {
   /** List of 1099s */
-  f1099s: PropTypes.array.isRequired,
+  f1099s: PropTypes.arrayOf(f1099Type).isRequired,
 
   /** Function to set 1099s */
   setF1099s: PropTypes.func.isRequired

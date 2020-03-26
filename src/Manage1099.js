@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Input from "./reusable/Input";
 import { useHistory } from "react-router-dom";
+import { f1099Type } from "./propTypes";
 
 const new1099 = {
   id: null,
@@ -12,9 +14,8 @@ const new1099 = {
   withheld: ""
 };
 
-function Manage1099() {
+function Manage1099({ f1099s, setF1099s }) {
   const history = useHistory();
-  const [f1099s, setF1099s] = useState([]); // holds list of 1099s
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   const [errors, setErrors] = useState({});
   useEffect(load1099s, []); // call this function immediately after the first render
@@ -110,5 +111,13 @@ function Manage1099() {
     </>
   );
 }
+
+Manage1099.propTypes = {
+  /** List of 1099s */
+  f1099s: PropTypes.arrayOf(f1099Type).isRequired,
+
+  /** Function to set 1099s */
+  setF1099s: PropTypes.func.isRequired
+};
 
 export default Manage1099;
