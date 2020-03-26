@@ -18,7 +18,9 @@ function Grid({ f1099s, setF1099s }) {
   }
 
   function load1099s() {
-    f1099api.get1099s().then(({ data }) => setF1099s(data));
+    // Fetch 1099s if we haven't already.
+    if (f1099s.length === 0)
+      f1099api.get1099s().then(({ data }) => setF1099s(data));
   }
 
   // HTML is a representation of application state, not a source of truth.

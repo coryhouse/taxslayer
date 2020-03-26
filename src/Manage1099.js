@@ -21,7 +21,8 @@ function Manage1099({ f1099s, setF1099s }) {
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function load1099s() {
-    f1099api.get1099s().then(({ data }) => setF1099s(data));
+    if (f1099s.length === 0)
+      f1099api.get1099s().then(({ data }) => setF1099s(data));
   }
 
   function handleSubmit(event) {
