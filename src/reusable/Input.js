@@ -13,12 +13,12 @@ const Input = ({
   onError,
   type
 }) => {
-  function handleBlur(event) {
-    let validationError = "";
-    if (required && !value) validationError = `${label} is required`;
-    if (onError) onError(validationError, id);
-    if (onBlur) onBlur(event); // call onBlur if specified
-  }
+  // function handleBlur(event) {
+  //   let validationError = "";
+  //   if (required && !value) validationError = `${label} is required`;
+  //   if (onError) onError(validationError, id);
+  //   if (onBlur) onBlur(event); // call onBlur if specified
+  // }
 
   return (
     <div className="form-group">
@@ -28,7 +28,7 @@ const Input = ({
       <br />
       <input
         id={id}
-        onBlur={handleBlur}
+        onBlur={onBlur}
         className="form-control"
         onChange={onChange}
         type={type}

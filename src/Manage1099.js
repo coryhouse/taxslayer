@@ -42,8 +42,17 @@ function Manage1099({ f1099s, setF1099s }) {
     return f1099ToEdit;
   }
 
+  function isValid() {
+    const _errors = {}; // Deliberately prefixing with an underscore to avoid a naming conflict.
+    if (!f1099.ein) _errors.ein = "EIN is required";
+    if (!f1099.employer) _errors.employer = "Employer is required";
+    setErrors(_errors); // update state
+    return Object.keys(_errors).length === 0; // If the errors object is still empty, we're good. 👍
+  }
+
   function handleSubmit(event) {
     event.preventDefault(); // don't reload the page
+    if (!isValid()) return;
     f1099api.save1099(f1099).then(response => {
       const saved1099 = response.data; // this has the new ID assigned
       // handle add vs edit
@@ -96,7 +105,6 @@ function Manage1099({ f1099s, setF1099s }) {
         <Input
           label="EIN"
           id="ein"
-          onError={handleError}
           error={errors.ein}
           required
           onChange={handleChange}
@@ -105,7 +113,6 @@ function Manage1099({ f1099s, setF1099s }) {
         <Input
           label="Employer"
           id="employer"
-          onError={handleError}
           error={errors.employer}
           required
           onChange={handleChange}
@@ -114,7 +121,6 @@ function Manage1099({ f1099s, setF1099s }) {
         <Input
           label="Wages"
           id="wages"
-          onError={handleError}
           error={errors.wages}
           required
           type="number"
@@ -124,7 +130,6 @@ function Manage1099({ f1099s, setF1099s }) {
         <Input
           label="Withheld"
           id="withheld"
-          onError={handleError}
           error={errors.withheld}
           required
           type="number"
