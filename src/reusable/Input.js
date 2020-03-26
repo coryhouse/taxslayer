@@ -10,7 +10,8 @@ const Input = ({
   required,
   onBlur,
   error,
-  onError
+  onError,
+  type
 }) => {
   function handleBlur(event) {
     let validationError = "";
@@ -30,6 +31,7 @@ const Input = ({
         onBlur={handleBlur}
         className="form-control"
         onChange={onChange}
+        type={type}
         value={value}
       />
       {error && (
@@ -54,14 +56,19 @@ Input.propTypes = {
 
   /** Input label */
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+
+  /** Input type */
+  type: PropTypes.oneOf(["text", "number", "password", "phone", "email"]),
+
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   required: PropTypes.bool
 };
 
 Input.defaultProps = {
-  required: false
+  required: false,
+  type: "text"
 };
 
 export default Input;
