@@ -14,6 +14,8 @@ export function delete1099(id) {
   return axios.delete(`http://localhost:3001/f1099s/${id}`);
 }
 
-export function add1099(f1099) {
-  return axios.post("http://localhost:3001/f1099s", f1099);
+export function save1099(f1099) {
+  let url = "http://localhost:3001/f1099s/";
+  if (f1099.id) url += f1099.id;
+  return axios[f1099.id ? "put" : "post"](url, f1099);
 }
