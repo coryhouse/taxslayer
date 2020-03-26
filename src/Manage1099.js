@@ -11,7 +11,7 @@ const new1099 = {
   withheld: ""
 };
 
-function Manage1099s() {
+function Manage1099() {
   const [f1099s, setF1099s] = useState([]); // holds list of 1099s
   const [f1099, setF1099] = useState(new1099); // holds add 1099 form
   const [errors, setErrors] = useState({});
@@ -110,4 +110,4 @@ function Manage1099s() {
   );
 }
 
-export default Manage1099s;
+export default Manage1099;
