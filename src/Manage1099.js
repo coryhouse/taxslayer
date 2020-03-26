@@ -65,8 +65,7 @@ function Manage1099() {
 
   return (
     <>
-      <h1>1099s</h1>
-      <h2>Add 1099</h2>
+      <h1>Add 1099</h1>
       <form onSubmit={handleSubmit}>
         <Input
           label="EIN"
