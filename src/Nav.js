@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Nav() {
   return (
     <>
-      <a href="/">Home</a> | <a href="/f1099s">1099s</a>
+      <NavLink to="/">Home</NavLink> | <NavLink to="/f1099s">1099s</NavLink>
     </>
   );
 }
