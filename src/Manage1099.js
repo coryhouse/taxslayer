@@ -131,7 +131,11 @@ function Manage1099({ f1099s, setF1099s }) {
           onChange={handleChange}
           value={f1099.withheld}
         />
-        <input type="submit" value="Add 1099" className="btn btn-primary" />
+        <input
+          type="submit"
+          value={idToEdit ? "Save 1099" : "Add 1099"}
+          className="btn btn-primary"
+        />
       </form>
     </>
   );

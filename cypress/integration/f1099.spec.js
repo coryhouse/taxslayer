@@ -1,10 +1,26 @@
 /// <reference types="cypress" />
 
 context("F1099s", () => {
-  it.only("should load 1099 when user clicks edit", () => {
+  it.only("should support editing a 1099", () => {
     cy.visit("http://localhost:3000/f1099s");
     cy.findByLabelText("Edit Amazon 1099").click();
-    cy.findByText("Edit Amazon 1099");
+    cy.findByText("Edit Amazon 1099"); // confirm header exists
+    cy.findByLabelText("EIN *")
+      .clear()
+      .type("new Amazon EIN");
+    cy.findByText("Save 1099").click();
+    // Now I should be back on the grid page.
+    cy.findByText("new Amazon EIN");
+
+    // Great, if we got here, the edit worked. Now let's revert our edit
+    cy.findByLabelText("Edit Amazon 1099").click();
+    cy.findByLabelText("EIN *")
+      .clear()
+      .type("82-823838"); // NOTE, this matches mockData.js
+    cy.findByText("Save 1099").click();
+
+    // Now I'm back on the grid page, so assure the original is displaying again.
+    cy.findByText("82-823838");
   });
 
   it("should display validation onBlur of empty fields", () => {
