@@ -26,14 +26,20 @@ function Manage1099({ f1099s, setF1099s }) {
     if (!idToEdit) return;
     if (f1099s.length === 0) {
       f1099api.get1099s().then(({ data }) => {
-        setF1099s(data);
-        const f1099ToEdit = data.find(d => d.id === parseInt(idToEdit));
+        setF1099s(data); // This is an async call. React will set this state in the near future. That's why I'm referencing data below instead.
+        const f1099ToEdit = get1099ById(data, idToEdit);
         setF1099(f1099ToEdit);
       });
     } else {
-      const f1099ToEdit = f1099s.find(d => d.id === parseInt(idToEdit));
+      const f1099ToEdit = get1099ById(f1099s, idToEdit);
       setF1099(f1099ToEdit);
     }
+  }
+
+  function get1099ById(f1099s, id) {
+    const f1099ToEdit = f1099s.find(d => d.id === parseInt(id));
+    if (!f1099ToEdit) return history.push("/page-not-found");
+    return f1099ToEdit;
   }
 
   function handleSubmit(event) {
