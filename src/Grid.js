@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function Grid() {
   const [f1099s, setF1099s] = useState([]); // holds list of 1099s
@@ -45,7 +46,7 @@ function Grid() {
   return (
     <>
       <h1>1099s</h1>
-      <a href="/manage">Add 1099</a>
+      <Link to="/manage">Add 1099</Link>
       <table className="table">
         <thead>
           <tr>
