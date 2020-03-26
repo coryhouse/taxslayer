@@ -112,6 +112,7 @@ function Manage1099({ f1099s, setF1099s }) {
           onError={handleError}
           error={errors.wages}
           required
+          type="number"
           onChange={handleChange}
           value={f1099.wages}
         />
@@ -121,6 +122,7 @@ function Manage1099({ f1099s, setF1099s }) {
           onError={handleError}
           error={errors.withheld}
           required
+          type="number"
           onChange={handleChange}
           value={f1099.withheld}
         />
