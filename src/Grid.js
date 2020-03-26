@@ -45,6 +45,7 @@ function Grid() {
   return (
     <>
       <h1>1099s</h1>
+      <a href="/manage">Add 1099</a>
       <table className="table">
         <thead>
           <tr>
