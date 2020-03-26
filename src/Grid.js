@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import * as f1099api from "./api/f1099api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-function Grid() {
-  const [f1099s, setF1099s] = useState([]); // holds list of 1099s
+function Grid({ f1099s, setF1099s }) {
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function onDeleteClick(id) {
@@ -46,7 +46,9 @@ function Grid() {
   return (
     <>
       <h1>1099s</h1>
-      <Link to="/manage">Add 1099</Link>
+      <Link to="/manage" className="btn btn-primary" role="button">
+        Add 1099
+      </Link>
       <table className="table">
         <thead>
           <tr>
@@ -63,5 +65,13 @@ function Grid() {
     </>
   );
 }
+
+Grid.propTypes = {
+  /** List of 1099s */
+  f1099s: PropTypes.array.isRequired,
+
+  /** Function to set 1099s */
+  setF1099s: PropTypes.func.isRequired
+};
 
 export default Grid;
