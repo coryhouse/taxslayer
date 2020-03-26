@@ -23,12 +23,17 @@ function Manage1099({ f1099s, setF1099s }) {
   useEffect(load1099s, []); // call this function immediately after the first render
 
   function load1099s() {
-    if (f1099s.length === 0 && idToEdit)
+    if (!idToEdit) return;
+    if (f1099s.length === 0) {
       f1099api.get1099s().then(({ data }) => {
         setF1099s(data);
         const f1099ToEdit = data.find(d => d.id === parseInt(idToEdit));
         setF1099(f1099ToEdit);
       });
+    } else {
+      const f1099ToEdit = f1099s.find(d => d.id === parseInt(idToEdit));
+      setF1099(f1099ToEdit);
+    }
   }
 
   function handleSubmit(event) {
@@ -75,7 +80,7 @@ function Manage1099({ f1099s, setF1099s }) {
 
   return (
     <>
-      <h1>Add 1099</h1>
+      <h1>{idToEdit ? `Edit ${f1099.employer} 1099` : "Add 1099"}</h1>
       <form onSubmit={handleSubmit}>
         <Input
           label="EIN"
